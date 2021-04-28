@@ -1,6 +1,7 @@
 import React from "react";
 import { CardDeck, Card, Button, Col, Row, Container } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
+import Messages from "../messages";
 import ThreadInfo from "./ThreadInfo";
 import UniqueMessage from './UniqueMessage'
 
@@ -26,15 +27,19 @@ export default function ThreadListItem(props) {
   //this function is a workaround for a bug in the db, I cheat the URL which are the params of Convo
   const handleOnClick = (e) => {
     e.preventDefault()
-    //console.log("MATCH", writeTo, props.thread[0].applicant_id)
+    console.log("CLICK", writeTo, props.thread[0].applicant_id)
     const destinationUser = writeTo;
     const firstDestination = props.thread[0].applicant_id
-    if (destinationUser === firstDestination){
-      history.push(`/messages/${props.userLogged}/${destinationUser}`)
 
-    } else {
-      history.push(`/messages/${props.userLogged}/${firstDestination}`)
-    }
+    history.push(`/messages/${props.userLogged}/${destinationUser}`)
+
+    // if (destinationUser === firstDestination){
+    //   history.push(`/messages/${props.userLogged}/${destinationUser}`)
+
+    // } else {
+    //   history.push(`/messages/${props.userLogged}/${firstDestination}`)
+    // }
+ 
   }
   console.log("WriteTo", writeTo)
   return (

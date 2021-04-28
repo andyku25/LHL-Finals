@@ -22,6 +22,7 @@ import { UserContext } from './UserContext'
 import Convo from './components/messages/Convo';
 import EditProfileForm from './components/profile/EditProfileForm';
 import { LoadScript } from '@react-google-maps/api';
+import Messages from './components/messages';
 
 // import { Container} from 'react-bootstrap';
 const API_KEY = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
@@ -56,7 +57,7 @@ const App = () => {
             <Route path="/search/roommates/:user_id" exact component={() => <RoommateCard users={state.users} cities={state.cities}/>} /> 
             <Route path="/messages/" exact component={() => <Inbox users={state.users} messages={state.messages}/>} /> 
          {/*    <Route path="/messages/" exact component={() => <ThreadList users={state.users} messages={state.messages}/>} />  */}
-            <Route path="/messages/:user_id/:recipient_id" exact component={() => <Convo users={state.users} messages={state.messages}/>} /> 
+            <Route path="/messages/:user_id/:recipient_id" exact component={() => <Messages users={state.users} messages={state.messages}/>} /> 
 
 
             <Route path="/search/rooms" exact component={() => <RoomsByCity users={state.users} cities={state.cities} rooms={state.rooms}/>} /> 

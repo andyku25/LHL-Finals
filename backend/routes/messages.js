@@ -55,12 +55,12 @@ module.exports = ({ getMessages, getMessagesByUser, addMessage, getMessageThread
 
    const userid = req.params.userid;
    const searched_id = req.params.searched_id;
-   const is_owner = req.query.is_owner;
+   //const is_owner = req.query.is_owner;
    //const is_owner = JSON.parse(req.params.is_owner);
 
    //console.log("QUERY thread",is_owner)
 
-    getMessageThread(userid, searched_id, true)
+    getMessageThread(userid, searched_id)
       .then((messages) => {
       // console.log("MESSAGES",messages)
       res.json(messages)})

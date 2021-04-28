@@ -50,30 +50,14 @@ module.exports = (db) => {
       })
       .catch((err) => err);
   };
-//get all messages SENT TO user
-  // const getMessagesForUser = (user) => {
-  //   const query = {
-  //     text: `SELECT * FROM messages WHERE receiver_id = $1`,
-  //     values: [user],
-  // };
 
-  //   return db
-  //     .query(query)
-  //     .then((result) => result.rows[0])
-  //     .catch((err) => err);
-  // };
-
-
-  // user_id/room or applicant id + is_owner in params to filter by applicanr, probably not the best way
-  const getMessageThread = (userid, searched_id, is_owner) => {
-    let queryString = `SELECT * FROM messages WHERE (sender_id = $1 or receiver_id = $1) and (room_id = $2);`
-    if (is_owner) {
-      queryString = `SELECT * FROM messages WHERE (sender_id = $1 or receiver_id = $1) and (applicant_id = $2);`
-    } else {
-
-    }
+ 
+  const getMessageThread = (userid, searched_id) => {
+  
+    let queryString = `SELECT * FROM messages WHERE (sender_id = $1 or receiver_id = $1) and (applicant_id = $2 or applicant_id = $1);`
+  
     const query = {
-      // text: `SELECT * FROM messages WHERE sender_id = $1 or receiver_id = $1;`,
+
       text: queryString,
       values: [userid, searched_id]
     };
