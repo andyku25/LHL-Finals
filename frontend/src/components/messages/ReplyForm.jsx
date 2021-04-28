@@ -48,13 +48,18 @@ export default function ReplyForm(props) {
       .catch((err) => console.log(err))
   }
 
+  const getFirstName = (id) => {
+    const replyTo = props.recipient_name(id).firstname
+    console.log("in reply", replyTo)
+    return replyTo
 
+  }
 
   return (
     <Container fluid>
       <InputGroup className="replyText">
         <InputGroup.Prepend>
-          <InputGroup.Text>Reply to { props.recipient_name} </InputGroup.Text>
+          <InputGroup.Text>Reply to {getFirstName(props.recipient)} </InputGroup.Text>
         </InputGroup.Prepend>
         <FormControl  as="textarea" aria-label="With textarea" onChange={(e) => updateMail(e)}
         />
