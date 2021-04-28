@@ -92,10 +92,11 @@ export default function Inbox(props) {
       {user !== "empty" && 
         <div>
           {threads.map((thread, index) => {
+            const threadSorted = thread.sort((a, b) => (a.id > b.id) ? 1 : -1)
             return (
               <Thread
                 key={index}
-                thread={thread}
+                thread={threadSorted}
                 userLogged={user.id}
                 users={props.users}
               />

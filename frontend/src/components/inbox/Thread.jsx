@@ -15,7 +15,7 @@ export default function ThreadListItem(props) {
   //This establish will be the next recipient. first message sender = !applicant
   let writeTo = null
   if (parseInt(props.userLogged) === props.thread[0].applicant_id){
-    console.log("Terend-tu?", props.thread[0].sender_id)
+    console.log("Props thread  dans Thread", props.thread)
     writeTo = props.thread[0].sender_id
   } else {
     writeTo = props.thread[0].receiver_id
