@@ -4,6 +4,7 @@ import { CardDeck, Card, Button, Col, Row, Container, Image } from 'react-bootst
 
 
 export default function ConvoThumbnail(props) {
+  console.log("THUMBNAIL Props", props)
 
   return (
     <div>

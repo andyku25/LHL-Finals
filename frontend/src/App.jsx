@@ -19,7 +19,6 @@ import NewRoomForm from './components/rooms/NewRoomForm';
 import EditRoomForm from './components/rooms/EditRoomForm';
 import axios from 'axios';
 import { UserContext } from './UserContext'
-import Convo from './components/messages/Convo';
 import EditProfileForm from './components/profile/EditProfileForm';
 import { LoadScript } from '@react-google-maps/api';
 import Messages from './components/messages';

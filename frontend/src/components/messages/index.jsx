@@ -7,6 +7,7 @@ import ReplyForm from './ReplyForm';
 import { Image } from 'react-bootstrap';
 import ConvoThumbnail from './ConvoThumbnail';
 import { UserContext } from '../../UserContext';
+import { RiContactsBookLine } from 'react-icons/ri';
 
 
 
@@ -14,11 +15,15 @@ export default function Messages(props) {
   console.log("Props in messages", props)
   const [thread, setThread] = useState([]);
   const [loading, setLoading] = useState(true);
-  const {user, setUser} = useContext(UserContext);
+  const {user} = useContext(UserContext);
   const { user_id, recipient_id } = useParams();
 
+  let userObj = (id) => {
+    return props.users.filter((u) => u.id === id)[0]
+  }
+
   useEffect(() => {
-    const apiURL = user.id ? `/api/messages/${recipient_id}/${user_id}` : `/api/messages`;
+    const apiURL = `/api/messages/${recipient_id}/${user_id}`
     // if (user.id === user_id) {
     //   const apiURL = `/api/messages/${recipient_id}/${user_id}`
     //   const pate = "fdfwe"
@@ -35,15 +40,16 @@ export default function Messages(props) {
     }) => {
       console.log("messages query result", data)
       setThread(data)
+      //console.log("THREAD ZERO",userObj(thread[0].sender_id))
       setLoading(false);
       })
       .catch((err) => console.log(err));
     }, []);
 
-    const messagesRendered = (thread) => {
-      const sortByMostRecent = thread.reverse()
-      console.log("thread", thread, "sorted", sortByMostRecent)
-      return (sortByMostRecent.map((message, index) => {
+    const messagesRendered = (array) => {
+      //const sortByMostRecent = thread.reverse()
+      //console.log("thread", thread, "sorted", sortByMostRecent)
+      return (array.map((message, index) => {
         // if (parseInt(user_id) === data[0].sender_id){
         //   senderPres = "You Wrote";
         // } else {
@@ -65,7 +71,12 @@ export default function Messages(props) {
         )
       }))
     }
-    console.log("messages Rendered", messagesRendered(thread))
+    //console.log("messages Rendered", messagesRendered(thread))
+    const destination = () => {
+
+      
+    }
+   // console.log("destination", destination(thread))
 
     return (
       <div>
@@ -75,19 +86,19 @@ export default function Messages(props) {
           <div className="convoReply">
           <ReplyForm
             userLogged={user.id}
-            // recipient={destination}
+            recipient={thread[0].receiver_id}
             room={thread[0].room_id}
             applicant={thread[0].applicant_id}
-            // recipient_name={userObj(destination).firstname}
+            recipient_name={userObj(thread[0].sender_id).firstname}
             placeholder="Hello"
           ><Image className="convoWrite" src="/write.png"/>
           </ReplyForm>
           </div>  
           <div className="convoMessages" >
         {/*     <div className="messagesCard">  */}
-          {/*     <ConvoThumbnail
-                recipientUser = {userObj(destination)}
-              /> */}
+            <ConvoThumbnail
+              recipientUser = {userObj(thread[0].sender_id)}
+            /> 
         {/*     </div> */}
             <div className="messagesText">
              {messagesRendered(thread)} 

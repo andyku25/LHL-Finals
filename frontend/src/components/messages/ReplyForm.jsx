@@ -8,7 +8,7 @@ import { UserContext } from '../../UserContext';
 
 
 export default function ReplyForm(props) {
-  //console.log("PROPS reply", props)
+  console.log("PROPS reply", props)
   const [messageContent, setMessageContent] = useState("")
   const {user, setUser} = useContext(UserContext)
   const history = useHistory()
@@ -38,7 +38,7 @@ export default function ReplyForm(props) {
       .then((response)=> {
         console.log("RESPONSE",response.data, user)
         if (user.is_owner){
-          console.log("Allo??")
+
           history.push(`/search/roommates`)
         } else {
           history.push(`/search/rooms`)

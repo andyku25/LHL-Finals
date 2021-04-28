@@ -54,10 +54,13 @@ module.exports = (db) => {
  
   const getMessageThread = (userid, searched_id) => {
   
-    let queryString = `SELECT * FROM messages WHERE (sender_id = $1 or receiver_id = $1) and (applicant_id = $2 or applicant_id = $1);`
+    let queryString = `
+      SELECT * FROM messages 
+      WHERE (sender_id = $1 AND receiver_id = $2) 
+      OR (sender_id = $2 AND receiver_id = $1)
+      ORDER BY sentdate;`
   
     const query = {
-
       text: queryString,
       values: [userid, searched_id]
     };
