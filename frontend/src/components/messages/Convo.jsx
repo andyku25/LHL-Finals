@@ -1,7 +1,7 @@
 // import logo from './logo.svg';
 import ConvoItem from './ConvoItem';
 import { CardDeck } from 'react-bootstrap';
-import { React, useEffect, useState, Fragment}  from 'react';
+import { React, useEffect, useState, useContext}  from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import axios from 'axios';
 
@@ -10,6 +10,7 @@ import ReplyForm from './ReplyForm';
 import PropertiesCheckbox from '../rooms/PropertiesCheckbox';
 import { Image } from 'react-bootstrap';
 import ConvoThumbnail from './ConvoThumbnail';
+import { UserContext } from '../../UserContext';
 
 
 
@@ -24,6 +25,7 @@ const Convo = (props) => {
   const [destination, setDestination] = useState(null);
   //const [threadWith, setThreadWith] = useState(null);
   const { user_id, recipient_id } = useParams();
+  const {user, setUser} = useContext(UserContext);
   const citiesArray = ["Toronto", "Vancouver", "Calgary", "Montreal"];
   
   let writeTo = null
@@ -36,12 +38,17 @@ const Convo = (props) => {
 
 
   useEffect(() => {
-
     const apiURL = user_id ? `/api/messages/${user_id}/${recipient_id}` : `/api/messages`;
+    // if (user.id === user_id) {
+    //   const apiURL = `/api/messages/${recipient_id}/${user_id}`
+    //   const pate = "fdfwe"
+    // } else {
+    //   const apiURL = `/api/messages/${user_id}/${recipient_id}`
+    // }
     axios({
       method: 'GET',
+      //url: `/api/messages/25/${user_id}`
       url: apiURL
-
     })
     .then(({
       data
